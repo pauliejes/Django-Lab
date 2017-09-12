@@ -21,7 +21,7 @@ Navigate back to the <django> directory inside your <cscLabs> labs directory. On
 Now we start our project with `django-admin startproject djangoLab`
 
 ```
-__** General structure of a Django project **__
+<strong>General structure of a Django project</strong>
 
     * djangoLab/ *  - Simple container, Call whatever you want.
       |_
