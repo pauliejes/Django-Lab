@@ -1,20 +1,20 @@
 # Django-Lab
 Instructions for the first Django lab. Highpoint Computer Science Club
 
-## 1) Create new directory in linus-public for your club labs
+## 1) Setup initial directories
 
    Lets start by making a new directory in linus-public for these labs. Next make another directory inside your clubLabs directory (Or whatever you called it) for the Django lab we're doing today. After that, cd into the new Django directory.
-   - I will be referring to these new directories as <clubLabs>, and <django>
+   - I will be referring to these new directories as \<clubLabs\>, and \<django\>
 
 ## 2) Install pip
 
-   We will need to install pip in a local directory since we do not have root access to linus-public. Here are the steps:
+   We will need to install pip in a local directory since we do not have root access to linus. Here are the steps:
 
-   - a. Download pip from an online repository : `wget https://bootstrap.pypa.io/get-pip.py`
+   - I) Download pip from an online repository : `wget https://bootstrap.pypa.io/get-pip.py`
 
-   - b. Install the downloaded package into a local directory : `python get-pip.py --user` This installs pip to your local directory `(.local/bin)`.
+   - II) Install the downloaded package into a local directory : `python get-pip.py --user` This installs pip to your local directory `(.local/bin)`.
 
-   - c. To use `pip` anywhere : `PATH=$PATH:~/.local/bin` followed by `source ~/.bashrc` to apply the changes.
+   - III) To use `pip` anywhere : `PATH=$PATH:~/.local/bin` followed by `source ~/.bashrc` to apply the changes.
 
 ## 3) Installing Django on linus
 
@@ -59,9 +59,9 @@ Currently we should have our website, called `djangoLab`. Our next step will be 
    We can now see a directory named `personal`. In here, we see a lot of similar files, and some new ones:
 
 ```
-      I) `<personal>`
+      I) <personal>
 
-         A) `<migrations>`
+         A) <migrations>
          	1) __init__.py
          	2) admin.py
          	3) apps.py
