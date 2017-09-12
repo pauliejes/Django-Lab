@@ -70,7 +70,7 @@ Currently we should have our website, called `djangoLab`. Our next step will be 
          	6) views.py
 ```
 
-   After starting the app, we edit mysite/settings.py, look though settings.py and find INSTALLED_APPS and add the new app 'personal' to the beginning of the array
+   After starting the app, we edit <djangoLab>(1)/<djangoLab>(2)/settings.py, look though settings.py and find INSTALLED_APPS and add the new app 'personal' to the beginning of the array
 
       - It should now look something like this:
       ```
@@ -120,10 +120,99 @@ Currently we should have our website, called `djangoLab`. Our next step will be 
       ```
       Save and exit views.py
 
-   https://pythonprogramming.net/first-site-django-python-tutorial/?completed=/django-web-development-with-python-intro/
+
 
 ## 6) Jinja Templating
 
    #### Now that we have a basic understanding of how Django is structured, we can begin to build our actual website.
 
-   In this example, we will begin to build a very basic website consisting of two static pages 'Home' and 'About', as well as a Blog.
+   In this example, we will begin to build a very basic website That is basically just a home page. If we have more time we will add more pages as well as functionality, otherwise we will save it for next week.
+
+   We'll start by making a header HTML file as a base for our entire site. This will basically be the shell of our site (Navbar/sidebar/footer ect...). We will put this file in a directory with the same name as our app - `personal`, this directory will be located in a new templates directory held in the personal directory. This seems confusing, but it has to do with the way that Django searches for your template names. This way you can have multiple apps across one site that use the same template names. This is basically adding an extra level of protection against Django confusing your templates with each other. Navigate to your `<djangoLab>(1)/personal` directory.
+
+      - `mkdir templates`
+      - `cd templates`
+      - `mkdir personal`
+      - `cd personal`
+      - `vim header.html`
+
+   After creating and opening header.html, we need to fill it with HTML. Header.html is the base of our website, so we'll want something like a navbar or title, this is also where you would put a footer if you want that. Here is a very basic example, try to add you're own flair:
+
+      ```
+      <!DOCTYPE html>
+      <html lang="en">
+
+         <head>
+         	<title>Computer Science Society</title>
+         	<meta charset="utf-8" />
+         </head>
+
+         <body class="body">
+         	<div>
+         	   {% block content %}
+         	   {% endblock %}
+         	</div>
+         </body>
+
+      </html>
+      ```
+      Save and exit header.html
+
+   What is this?
+   ```     
+   {% block content %}
+   {% endblock %}
+   ```
+   Meet Jinja. Jinja is a Python templating engine, with the goal of making it easier for you do dynamic things with HTML such as passing variables, or using simple logic. You might notice the syntax that Jinja uses {% %}, this denotes logic. For variables, you'll see {%{% }}. The use of block content and endlock is one of the two major ways of incorporating templates within templates, perfect for our header.
+
+
+   Now that we have a good base, we can finally make our home page. We will create a `home.html` file in the same place as our `header.html` - `<djangoLab>(1)/personal/templates/personal/`. In `home.html` you will put all the content that you want to display in the body of your homepage. Here is an example to demonstrate how to extend from `header.html`:
+
+      ```
+      {% extends "personal/header.html" %}
+      {% block content %}
+
+      <p>Welcome to the official website of the Computer Science Society</p>
+
+      {% endblock %}
+      ```
+      Save and exit home.html
+
+      - As you can see we are extending header.html, and filling the `{% block content %}` with regular html.
+
+   Block content isn't only useful for header files. If you want to get more experience using block content, try and figure out how to insert basic html contained in a different file. (Instead of extending, we include our new html file)
+
+
+## 7) Design
+
+   This is the final step for our first lab. We have our site up and running, displaying HTML. Now it's time to spice it up with some CSS and JavaScript. Whether you write your own CSS or use an online library, you will setup your static directory the same way. This directory will hold CSS, Js, and Pictures used throughout your site.
+
+   Lets start by setting up the static directory. Head to your personal directory and run the following:
+
+      - `mkdir static`
+      - `cd static`
+      - `mkdir personal`
+      - `cd personal`
+      - `mkdir css`
+      - `mkdir js`
+      - `mkdir img`
+
+   These are the directories where you will create, download, or store all the css/js/img files that you want to include in your personal app.
+
+
+   Once you finish setting up the `static` directory, you need to add some code to your `header.html` file. Open it up and add the following lines within your <head> tags:
+
+   ```
+   <head>
+      <title>Computer Science Society</title>
+	   <meta charset="utf-8" />
+      {% load staticfiles %}
+	   <link rel="stylesheet" href="{% static 'css/name_of_css_file.css' %}" type = "text/css"/>
+      <script src='{% static 'css/name_of_css_file.css' %}'></script>
+   </head>
+   ```
+   - The key here being `{% load staticfiles %}`. This line asks Django to check the settings.py file to see where we are specifying the location of our static files. Django then goes and downloads those specified files.
+
+#### Now you have a solid base to play with and further explore what you can do with Django
+
+    Continuing this series we can dive into Jinja variables, creating a simple blog, working with MongoDB(the default database for Django), Djangos admin control panel, and lastly, publishing your Django project to your own server along with securing your server with SSL.
