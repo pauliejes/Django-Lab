@@ -6,7 +6,7 @@ Instructions for the first Django lab. Highpoint Computer Science Club
    Lets start by making a new directory in linus-public for these labs. Next make another directory inside your clubLabs directory (Or whatever you called it) for the Django lab we're doing today. After that, cd into the new Django directory.
    - I will be referring to these new directories as <clubLabs>, and <django>
 
-## 2) Install pip.
+## 2) Install pip
 
    We will need to install pip in a local directory since we do not have root access to linus-public. Here are the steps:
 
@@ -24,7 +24,7 @@ Instructions for the first Django lab. Highpoint Computer Science Club
 
    Here we are adding `--user` since we cannot install Django system-wide on linus-public due to our lack of admin privileges).
 
-## 4) Creating a Project.
+## 4) Creating a Project
 
    In this step we will need to pick a name for the project. You will see that I have named mine `djangoLab`. Create your project using:
 
@@ -50,7 +50,7 @@ Instructions for the first Django lab. Highpoint Computer Science Club
 Currently we should have our website, called `djangoLab`. Our next step will be creating an app. With Django, a website is an app, or more commonly a collection of apps. But before all of that, we should navigate to `<djangoLab>(1)` and run `python manage.py runserver 0.0.0.0:XXXX`. This starts running the local development server, which you should be able to access at `http://127.0.0.1:XXXX`.
 
 
-## 5) Creating an app.
+## 5) Starting an app
 
    Make your way to the `<djangoLab>(1)` directory. We will start our first `djangoLab` app by running:
 
@@ -70,6 +70,60 @@ Currently we should have our website, called `djangoLab`. Our next step will be 
          	6) views.py
 ```
 
+   After starting the app, we edit mysite/settings.py, look though settings.py and find INSTALLED_APPS and add the new app 'personal' to the beginning of the array
+
+      - It should now look something like this:
+      ```
+      INSTALLED_APPS = [
+         'personal',
+         'django.contrib.admin',
+         'django.contrib.auth',
+         'django.contrib.contenttypes',
+         'django.contrib.sessions',
+         'django.contrib.messages',
+         'django.contrib.staticfiles',
+      ]
+      ```
+      Save and exit `settings.py`
+
+   Next we are going to take a look at urls.py which is found at `<djangoLab>(1)/<djangoLab>(2)/urls.py`. We need to tell the url to point to our new app - `personal`. To do this, we need to import 'include' from django.conf.urls, as well as add our personal app to urlpatterns. In the end, your file should look like this:
+
+      ```
+      from django.conf.urls import url, include
+      from django.contrib import admin
+
+      urlpatterns = [
+         url(r'^admin/', admin.site.urls),
+         url(r'^$', include('personal.urls')),
+      ]
+      ```
+      Save and exit `urls.py`
+
+   Continuing on, we now create and open a urls.py file located in our `<djangoLab>(1)/personal/` directory. We use  a regular expression that starts and ends with nothing. When that's the case we return views.index(which we will alter in the next step). Your code should look like the following:
+
+      ```
+      from django.conf.urls import url
+      from . import views
+
+      urlpatterns = [
+         url(r'^$', views.index, name='index')]
+      ```
+      Save and exit `urls.py`
+
+   Finally we edit `views.py` located at `<djangoLab>(1)/personal/views.py`. We want to define a function 'index' that takes a parameter 'request'. The function will return the outcome of a render. Render takes the request parameter first, then the template to render, then an optional dictionary of variables to pass through to the template. However right now we simply want to load a home.html template, which we will create in the next step.
+
+      ```
+      from django.shortcuts import render
+
+      def index(request):
+         return render(request, 'personal/home.html')
+      ```
+      Save and exit views.py
+
    https://pythonprogramming.net/first-site-django-python-tutorial/?completed=/django-web-development-with-python-intro/
 
-##
+## 6) Jinja Templating
+
+   #### Now that we have a basic understanding of how Django is structured, we can begin to build our actual website.
+
+   In this example, we will begin to build a very basic website consisting of two static pages 'Home' and 'About', as well as a Blog.
