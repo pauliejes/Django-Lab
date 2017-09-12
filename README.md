@@ -21,11 +21,15 @@ Navigate back to the <django> directory inside your <cscLabs> labs directory. On
 Now we start our project with `django-admin startproject djangoLab`
 
 ```
-djangoLab/ - Simple container, Call whatever you want.
-    manage.py - Lets you interact with your project via the command line.
-    djangoLab/ - Actual project directory.
-        __init__.py - Tells python this is a Python package.
-        settings.py - Settings for the project.
-        urls.py - URL rules. Django docs aptly describes as your table of contents.
-        wsgi.py - WSGI magic begins here. Worry about this when it comes time to actually deploy to a server.
+__** General structure of a Django project **__
+
+    * djangoLab/ *  - Simple container, Call whatever you want.
+      |_
+        * manage.py *  - Lets you interact with your project via the command line.
+        * djangoLab/ *  - Actual project directory.
+         |_
+            * __init__.py *  - Tells python this is a Python package.
+            * settings.py *  - Settings for the project.
+            * urls.py *  - URL rules. Django docs aptly describes as your table of contents.
+            * wsgi.py *  - WSGI magic begins here. Worry about this when it comes time to actually deploy to a server.
 ```
